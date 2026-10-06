@@ -3,6 +3,10 @@ const pages = document.querySelectorAll('.page');
 let currentPage = 0;
 let isPageScrolling = false;
 
+/* 모바일/태블릿 여부: 이 폭 이하에서는 네이티브 스크롤 + 커스텀 커서 비활성화 */
+const MOBILE_BP = 1024;
+const isMobile = () => window.innerWidth <= MOBILE_BP;
+
 document
   .querySelector('.main-project-container')
   .addEventListener('scroll', mainProjectContainerScroll);
@@ -17,6 +21,7 @@ function mainProjectContainerScroll() {
   }
 }
 function wheelEvent(e) {
+  if (isMobile()) return; // 모바일/태블릿: 네이티브 스크롤 사용
   if (isPageScrolling) return;
 
   e.preventDefault(); // 기본 스크롤 방지
@@ -74,6 +79,7 @@ const subCursor = document.querySelector('.cursor.sub');
 
 // 마우스 움직임에 따라 커서를 이동시키는 함수
 function moveCursor(e) {
+  if (isMobile() || !mainCursor) return; // 모바일: 커스텀 커서 비활성화
   const mouseX = e.clientX;
   const mouseY = e.clientY;
 

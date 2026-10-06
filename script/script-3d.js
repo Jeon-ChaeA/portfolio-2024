@@ -115,3 +115,10 @@ function animate() {
     renderer.render(scene, camera);
 }
 animate();
+
+// 창 크기 변경 / 기기 회전 시 캔버스 대응
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
