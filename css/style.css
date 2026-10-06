@@ -2396,19 +2396,22 @@ button:hover span {
     display: none;
   }
 
-  /* ================= section: about-me ================= */
+  /* ============ section: about-me (모바일 새 디자인: 통일된 카드 프로필) ============ */
   #about-me {
     height: auto;
+    background: linear-gradient(180deg, var(--cloudy-gray), var(--silver-gray));
   }
   .about-me-warp {
     position: static;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 22px;
-    padding: 90px 16px 50px;
+    align-items: stretch;
+    gap: 16px;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 96px 18px 56px;
   }
-  /* 콜라주 조각들을 평범한 세로 카드로 */
+  /* 모든 조각: 정적 배치 + 회전/투명도 제거, 전체 폭 */
   .post,
   .floppy-disk,
   .blue-bg,
@@ -2423,82 +2426,161 @@ button:hover span {
     bottom: auto !important;
     transform: none !important;
     opacity: 1 !important;
-    margin: 0 auto !important;
-    width: min(100%, 360px) !important;
-    max-width: 360px;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
   }
-  .chaea {
-    order: -1;
-    height: 430px !important;
-    background-size: contain !important;
-    background-repeat: no-repeat;
-    background-position: top center;
-  }
-  .post {
-    height: 240px !important;
-  }
-  .post h1 {
-    transform: none;
-    margin: 0;
-    padding-top: 70px;
-    padding-left: 36px;
-  }
-  .post ul {
-    margin-top: 14px;
-    padding-left: 36px;
-  }
-  .post li {
-    transform: none !important;
-    margin-left: 0 !important;
-  }
-  .floppy-disk {
-    height: 300px !important;
-  }
-  .floppy-disk h1 {
-    transform: none;
-    margin-left: 0;
-  }
-  .blue-bg {
+  /* 공통 카드: 장식 그래픽 제거하고 깔끔한 카드로 (그래픽 투명 가장자리가 글자를 잘라냄) */
+  .post,
+  .floppy-disk,
+  .blue-bg,
+  .ticket,
+  .paper,
+  .book {
+    background-image: none !important;
     height: auto !important;
-    min-height: 420px;
-    padding: 30px 24px;
+    min-height: 0 !important;
+    border-radius: 18px;
+    padding: 24px 22px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  }
+  .post,
+  .floppy-disk,
+  .ticket,
+  .paper,
+  .book {
+    background-color: var(--white);
+  }
+  /* 섹션 제목 통일 + 노란 액센트 바 */
+  .post h1,
+  .floppy-disk h1,
+  .paper-text h2,
+  .book-text h2 {
+    color: var(--MainBlue);
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0 0 14px !important;
+    padding: 0 !important;
+    transform: none !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  /* 노란 액센트 바 — 학력/교내(○ 마커가 이미 있음)는 제외해 중복 마커 방지 */
+  .post h1::before,
+  .floppy-disk h1::before,
+  .book-text h2:first-child::before {
+    content: '';
+    width: 6px;
+    height: 17px;
+    background: var(--MainYellow);
+    border-radius: 3px;
+    flex: 0 0 auto;
+  }
+
+  /* 순서: 사진 → 소개 → 키워드 → 자격증 → 학력 → 경력 → GitHub */
+  .chaea { order: 0; }
+  .blue-bg { order: 1; }
+  .ticket { order: 2; }
+  .post { order: 3; }
+  .paper { order: 4; }
+  .book { order: 5; }
+  .floppy-disk { order: 6; }
+
+  /* 프로필 사진 (전체 보이게) */
+  .chaea {
+    height: 300px !important;
+    border-radius: 18px;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    background-position: center top;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+  }
+
+  /* 소개 (파란 카드) */
+  .blue-bg {
+    background-color: var(--MainBlue) !important;
   }
   .blue-bg-text {
     transform: none;
     margin: 0;
+    color: var(--white);
+  }
+  .blue-bg h1 {
+    font-size: 26px;
+    margin-bottom: 2px;
+  }
+  .blue-bg p:nth-child(3) {
+    margin-top: 4px;
   }
   .blue-bg img {
     width: 100%;
     height: auto;
     max-width: 300px;
+    margin: 10px 0;
+    border-radius: 10px;
   }
-  .ticket {
-    height: auto !important;
-    min-height: 170px;
+  .blue-bg b {
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* 자격증 */
+  .post ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .post li {
+    transform: none !important;
+    margin: 0 0 8px !important;
+    color: var(--dim-black);
+  }
+
+  /* GitHub QR */
+  .floppy-disk {
     display: flex;
+    flex-direction: column;
     align-items: center;
+  }
+  .floppy-disk h1 {
     justify-content: center;
-    padding: 16px;
+    align-self: stretch;
+  }
+  .floppy-disk img {
+    width: 170px;
+    height: auto;
+    transform: none !important;
+    margin: 4px 0 0;
+  }
+
+  /* 키워드 */
+  .ticket {
+    text-align: center;
   }
   .ticket .ticket-tags {
     margin: 0;
+    line-height: 2.1;
+    color: var(--dim-black);
   }
-  .paper {
-    height: auto !important;
-    min-height: 480px;
-    padding: 30px 26px;
-  }
+
+  /* 학력 */
   .paper-text {
-    margin-top: 70px;
+    margin-top: 0;
     white-space: normal;
   }
+  .paper-text h2 {
+    margin-top: 22px !important;
+  }
+  .paper-text h2:first-child {
+    margin-top: 0 !important;
+  }
+
+  /* 경력 / 교육 */
   .book {
-    height: auto !important;
-    min-height: 520px;
-    padding: 40px 26px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 22px;
   }
   .book-text,
   .book-text-right,
@@ -2745,13 +2827,16 @@ button:hover span {
     width: 100%;
   }
   /* 모든 서브 프로젝트를 세로로 전부 표시 */
+  /* 6개를 세로로 전부 보여주되 compact하게 (전체 길이 단축) */
   .sub-project-left-content {
     position: static !important;
     opacity: 1 !important;
     visibility: visible !important;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 46px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--dim-gray);
   }
   .sub-project-left-wrap {
     width: 100%;
@@ -2761,25 +2846,30 @@ button:hover span {
     color: var(--dark-black);
   }
   .sub-project-title h1 {
-    font-size: 30px;
+    font-size: 24px;
     color: var(--MainBlue);
   }
   .sub-project-title h2 {
-    padding-top: 10px;
-    padding-bottom: 16px;
-    font-size: 15px;
+    padding-top: 4px;
+    padding-bottom: 10px;
+    font-size: 14px;
     color: var(--dim-black);
   }
   .sub-project-fade-wrap .link {
-    margin-top: 20px;
+    margin-top: 12px;
   }
   .sub-project-img {
-    margin-top: 18px;
+    margin-top: 8px;
     width: 100%;
   }
   .sub-project-img img {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
+    max-height: 210px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
   }
   .sub-project-right {
     display: none;
@@ -2878,8 +2968,14 @@ button:hover span {
     opacity: 1 !important;
     margin: 0 !important;
     width: 170px;
-    height: 250px;
+    height: 400px;
     flex: 0 0 auto;
+    /* 세로로 긴 배너 전체가 보이도록 (cover는 위아래를 잘라냄) */
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f2f2f2;
+    border-radius: 6px;
     box-shadow: 0 4px 8px #0000002f;
   }
   .lines-img {
