@@ -120,7 +120,7 @@
 
 - [Figma](https://www.figma.com/design/O8IpV9A3OqZvtqM7oeTw5U/%EA%B0%9C%EC%9D%B8%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4?node-id=0-1&t=u1x1J8mbiZgTn7gk-1)
   
-- [DEMO](https://jeon-chaea.github.io/chaea_portfolio/)
+- [DEMO](https://jeon-chaea.github.io/portfolio-2024/)
 
 
 # 📞 Contact
