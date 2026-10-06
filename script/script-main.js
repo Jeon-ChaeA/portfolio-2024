@@ -946,6 +946,7 @@ let isDragging = false; // 드래그 상태 플래그
 // 마우스 드래그 시작 이벤트
 document.querySelector('.design-img-container');
 document.addEventListener('mousedown', (e) => {
+  if (isMobile()) return;
   isDragging = true;
   startX = e.clientX;
   e.preventDefault();
@@ -953,6 +954,7 @@ document.addEventListener('mousedown', (e) => {
 
 // 마우스 이동 이벤트 핸들러
 document.addEventListener('mousemove', (e) => {
+  if (isMobile()) return;
   if (!isDragging) return;
   const diff = e.clientX - startX;
   if (diff > 100) {
@@ -972,12 +974,14 @@ document.addEventListener('mouseup', () => {
 // 터치 시작 이벤트 핸들러
 document.querySelector('.design-img-container');
 document.addEventListener('touchstart', (e) => {
+  if (isMobile()) return; // 모바일: 네이티브 가로 스크롤 사용 (캐러셀 드래그 비활성화)
   isDragging = true;
   startX = e.touches[0].clientX;
 });
 
 // 터치 이동 이벤트 핸들러
 document.addEventListener('touchmove', (e) => {
+  if (isMobile()) return; // 모바일: 스와이프가 네이티브 스크롤을 끊지 않도록
   if (!isDragging) return;
   const diff = e.touches[0].clientX - startX;
   if (diff > 100) {
@@ -996,7 +1000,9 @@ document.addEventListener('touchend', () => {
 
 updateCarousel();
 
-setInterval(moveNext, 5000); // 자동 슬라이드 설정
+if (!isMobile()) {
+  setInterval(moveNext, 5000); // 자동 슬라이드 설정 (모바일에선 네이티브 스크롤 사용)
+}
 
 /* #### section: contact #### */
 /* contact contact me이메일 전송*/

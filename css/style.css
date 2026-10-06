@@ -2360,9 +2360,9 @@ button:hover span {
   }
   .main-title .name {
     position: static;
-    width: min(78%, 300px);
+    width: min(80%, 460px);
     height: auto;
-    margin: 0 auto 10px;
+    margin: 0 auto 14px;
     display: block;
   }
   .bottom-title {
@@ -2372,17 +2372,18 @@ button:hover span {
     bottom: auto;
     margin-top: 10px;
     width: 100%;
+    max-width: 560px;
   }
   .bottom-point {
     display: none;
   }
   .bottom-text h2,
   .magic-text {
-    font-size: 22px;
+    font-size: clamp(22px, 5vw, 32px);
     line-height: 1.35;
   }
   .bottom-text p {
-    font-size: 12px;
+    font-size: clamp(12px, 2.5vw, 15px);
     line-height: 1.9;
     letter-spacing: -0.4px;
   }
@@ -2488,12 +2489,14 @@ button:hover span {
   .floppy-disk { order: 6; }
 
   /* 프로필 사진 (전체 보이게) */
+  /* 얼굴 위주로 크롭 (하단에 베이크된 JEON CHAE A 이름은 제외 — 이름은 아래 파란 카드에 있음) */
   .chaea {
-    height: 300px !important;
+    height: 215px !important;
     border-radius: 18px;
     background-size: cover !important;
     background-repeat: no-repeat;
     background-position: center top;
+    background-color: var(--silver-gray);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
   }
 
@@ -2859,14 +2862,13 @@ button:hover span {
     margin-top: 12px;
   }
   .sub-project-img {
-    margin-top: 8px;
+    margin-top: 4px;
     width: 100%;
   }
   .sub-project-img img {
-    width: auto;
-    max-width: 100%;
+    width: 100%;
     height: auto;
-    max-height: 210px;
+    max-height: 300px;
     object-fit: contain;
     display: block;
     margin: 0 auto;
@@ -3011,19 +3013,35 @@ button:hover span {
     margin-top: 30px;
     width: 100%;
     max-width: 360px;
+    text-align: left;
   }
   #contact-form {
     width: 100%;
+    position: relative;
   }
   .contact-me h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 22px;
+    margin-bottom: 16px;
   }
+  /* 입력창 + 화살표 버튼 + 밑줄 정렬 */
   #contact-form input {
-    width: 82%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 44px 10px 6px;
+    font-size: 16px;
+  }
+  #contact-form button {
+    top: auto;
+    bottom: 8px;
+    right: 8px;
+  }
+  #contact-form button img {
+    width: 22px;
+    height: auto;
   }
   #contact-form::before {
     width: 100%;
+    bottom: 0;
   }
   .contact .contact-sns {
     position: static;
