@@ -2412,7 +2412,8 @@ button:hover span {
     margin: 0 auto;
     padding: 96px 18px 56px;
   }
-  /* 모든 조각: 정적 배치 + 회전/투명도 제거, 전체 폭 */
+  /* 모든 조각: 정적 배치 + 회전 제거, 전체 폭 */
+  /* opacity는 강제하지 않음 → 기본 숨김(opacity:0) 상태에서 .animate로 등장 애니메이션 동작 */
   .post,
   .floppy-disk,
   .blue-bg,
@@ -2426,10 +2427,13 @@ button:hover span {
     right: auto !important;
     bottom: auto !important;
     transform: none !important;
-    opacity: 1 !important;
     margin: 0 !important;
     width: 100% !important;
     max-width: none !important;
+  }
+  /* 등장 애니메이션: 스크롤 진입 시 .animate 로 페이드인 (JS 미동작 시 대비해 .chaea 는 항상 표시) */
+  .about-me-warp .animate {
+    opacity: 1 !important;
   }
   /* 공통 카드: 장식 그래픽 제거하고 깔끔한 카드로 (그래픽 투명 가장자리가 글자를 잘라냄) */
   .post,
@@ -2490,8 +2494,10 @@ button:hover span {
 
   /* 프로필 사진 (전체 보이게) */
   /* 얼굴 위주로 크롭 (하단에 베이크된 JEON CHAE A 이름은 제외 — 이름은 아래 파란 카드에 있음) */
+  /* 사진: px 고정 대신 비율(aspect-ratio)로 유동 — 얼굴만 보이도록 상단 크롭 */
   .chaea {
-    height: 215px !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
     border-radius: 18px;
     background-size: cover !important;
     background-repeat: no-repeat;
@@ -2829,20 +2835,23 @@ button:hover span {
   .sub-project-left {
     width: 100%;
   }
-  /* 모든 서브 프로젝트를 세로로 전부 표시 */
-  /* 6개를 세로로 전부 보여주되 compact하게 (전체 길이 단축) */
+  /* 모든 서브 프로젝트를 표시: 텍스트 + 이미지를 한 행에 (가로 여유 없으면 자동 줄바꿈=세로) */
   .sub-project-left-content {
     position: static !important;
     opacity: 1 !important;
     visibility: visible !important;
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--dim-gray);
   }
   .sub-project-left-wrap {
-    width: 100%;
+    flex: 1 1 240px;
+    min-width: 0;
     margin-left: 0;
   }
   .sub-project-title {
@@ -2862,13 +2871,13 @@ button:hover span {
     margin-top: 12px;
   }
   .sub-project-img {
-    margin-top: 4px;
-    width: 100%;
+    flex: 1 1 240px;
+    margin-top: 0;
   }
   .sub-project-img img {
     width: 100%;
     height: auto;
-    max-height: 300px;
+    max-height: 340px;
     object-fit: contain;
     display: block;
     margin: 0 auto;

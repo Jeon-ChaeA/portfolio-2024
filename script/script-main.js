@@ -416,29 +416,31 @@ for (const star of document.getElementsByClassName('magic-star')) {
 
 
 /* #### section: about-me #### */
+let aboutMeAnimated = false;
 function triggerAnimation() {
+  if (aboutMeAnimated) return;
   const section = document.querySelector('#about-me');
-  
-  // 섹션의 위치와 뷰포트의 위치를 비교
-  const sectionTop = section.getBoundingClientRect().top;
-  const sectionBottom = section.getBoundingClientRect().bottom;
+  if (!section) return;
 
-  // 섹션이 뷰포트 안에 들어왔을 때
-  if (sectionTop <= window.innerHeight / 2 && sectionBottom >= 0) {
-    const elements = section.querySelectorAll('div');
+  const rect = section.getBoundingClientRect();
 
-    // 기존 애니메이션 클래스 제거
-    elements.forEach((el) => el.classList.remove('animate'));
-
-    // 순차적으로 애니메이션 클래스 추가
-    elements.forEach((el, index) => {
-      setTimeout(() => el.classList.add('animate'), index * 400); // 각 요소마다 딜레이 추가
+  // 섹션이 뷰포트 안에 들어왔을 때 (1회만 실행 — 스크롤마다 재실행되던 깜빡임 제거)
+  if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+    aboutMeAnimated = true;
+    // 카드 요소만 순차적으로 등장
+    const cards = section.querySelectorAll(
+      '.chaea, .blue-bg, .ticket, .post, .paper, .book, .floppy-disk'
+    );
+    cards.forEach((el, index) => {
+      setTimeout(() => el.classList.add('animate'), index * 150);
     });
+    window.removeEventListener('scroll', triggerAnimation);
   }
 }
 
-// 스크롤 이벤트로 섹션 상태 확인
+// 스크롤 + 로드 시 섹션 상태 확인
 window.addEventListener('scroll', triggerAnimation);
+window.addEventListener('load', triggerAnimation);
 
 
 
