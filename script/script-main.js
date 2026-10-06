@@ -176,16 +176,24 @@ fetch('./html/nav.html') // nav.html 경로
 
     /* nav */
     const navigation = document.getElementById('main-navigation'); // 네비게이션 메뉴
-    const toggleIcon = document.getElementById('toggle-icon'); // 토글 아이콘
+    const toggleIcon = document.getElementById('toggle-icon'); // 토글 아이콘(이미지)
+    const toggleBtn = document.getElementById('nav-toggle'); // 토글 버튼
+
+    // 네비게이션 열림/닫힘 상태를 보조기술에 전달
+    function syncNavAria() {
+      const opened = !navigation.classList.contains('hidden');
+      toggleBtn.setAttribute('aria-expanded', String(opened));
+      toggleBtn.setAttribute('aria-label', opened ? '메뉴 닫기' : '메뉴 열기');
+    }
     const accessoriesText = document.querySelector('.accessories-text'); // accessories-text
     const numbering = document.querySelector('.numbering'); // numbering
 
     let isLastPage = false; // 현재 마지막 페이지 여부를 추적
 
-    toggleIcon.addEventListener('click', function () {
-      console.log(1);
+    toggleBtn.addEventListener('click', function () {
       // 네비게이션 메뉴 숨기기/보이기
       navigation.classList.toggle('hidden');
+      syncNavAria();
 
       // 네비게이션 활성화 시 accessories-text, numbering, accessories-circle 숨기기
       if (!navigation.classList.contains('hidden')) {
@@ -222,6 +230,7 @@ fetch('./html/nav.html') // nav.html 경로
       link.addEventListener('click', () => {
         // 네비게이션 닫기
         navigation.classList.add('hidden');
+        syncNavAria();
 
         // accessories-text, numbering, accessories-circle 다시 표시
         accessoriesText.style.display = 'block';
@@ -833,7 +842,7 @@ let currentSlideIndex = 0; // 변수 이름 변경
 const designTitle = document.querySelector('.design-title');
 const designNameH3 = designTitle.querySelector('.desgin-name h3');
 const designNameH2 = designTitle.querySelector('.desgin-name h2');
-const designSubtitleH5 = designTitle.querySelector('h5');
+const designSubtitleH5 = designTitle.querySelector('.design-sub');
 
 // 슬라이드별 텍스트 데이터
 const slideData = [

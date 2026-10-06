@@ -1,5 +1,5 @@
 <div class="nav-container">
-  <div class="navigation hidden" id="main-navigation">
+  <nav class="navigation hidden" id="main-navigation" aria-label="주요 메뉴">
   <div class="navigation-wrap">
     <div class="navigation-title">
       <p><a href="index.html#main-page">Main page</a></p>
@@ -12,11 +12,20 @@
       <p><a href="index.html#contact">Contact</a></p>
     </div>
   </div>
-</div>
+</nav>
 
 <div class="accessories">
   <div class="navigation-icon">
-    <img id="toggle-icon" src="images/nav/hamburger-icon.png" alt="hamburger" >
+    <button
+      id="nav-toggle"
+      type="button"
+      class="nav-toggle-btn"
+      aria-label="메뉴 열기"
+      aria-expanded="false"
+      aria-controls="main-navigation"
+    >
+      <img id="toggle-icon" src="images/nav/hamburger-icon.png" alt="" >
+    </button>
   </div>
   <div class="accessories-text">
     <p>Front-end<span>Developer</span></p>
