@@ -2408,9 +2408,10 @@ button:hover span {
     flex-direction: column;
     align-items: stretch;
     gap: 16px;
-    max-width: 420px;
+    width: min(92%, 600px);
+    max-width: 600px;
     margin: 0 auto;
-    padding: 96px 18px 56px;
+    padding: 96px 0 56px;
   }
   /* 모든 조각: 정적 배치 + 회전 제거, 전체 폭 */
   /* opacity는 강제하지 않음 → 기본 숨김(opacity:0) 상태에서 .animate로 등장 애니메이션 동작 */
@@ -2802,15 +2803,29 @@ button:hover span {
     top: auto !important;
     bottom: auto;
     height: auto !important;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 6px;
     margin-top: 8px;
   }
+  /* 6개 스킬 카드를 한 줄에 균등 배치 */
   .main-project-skill {
-    width: 44%;
-    max-width: 150px;
-    height: 110px;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    max-width: none;
+    height: 92px;
+  }
+  .main-project-skill .skill-front img {
+    width: 50%;
+    max-width: 58px;
+    height: auto;
+    padding-top: 14px;
+  }
+  .main-project-skill .skill-front .skill-name {
+    font-size: clamp(8px, 2.1vw, 12px);
+    letter-spacing: 0;
+    margin-top: -14px;
   }
   .scroll-item {
     position: static !important;
@@ -3099,9 +3114,6 @@ button:hover span {
   }
   .switch-warp {
     grid-column: span 2;
-  }
-  .main-project-skill {
-    width: 46%;
   }
   .myname h1 {
     font-size: 34px;
